@@ -83,97 +83,111 @@
     };
   };
 
-  outputs = {
-    self,
-    nixpkgs,
-    home-manager,
-    systems,
-    ...
-  } @ inputs: let
-    inherit (self) outputs;
-    lib = nixpkgs.lib // home-manager.lib;
-    forEachSystem = f: lib.genAttrs (import systems) (system: f pkgsFor.${system});
-    pkgsFor = lib.genAttrs (import systems) (
-      system:
+  outputs =
+    {
+      self,
+      nixpkgs,
+      home-manager,
+      systems,
+      ...
+    }@inputs:
+    let
+      inherit (self) outputs;
+      lib = nixpkgs.lib // home-manager.lib;
+      forEachSystem = f: lib.genAttrs (import systems) (system: f pkgsFor.${system});
+      pkgsFor = lib.genAttrs (import systems) (
+        system:
         import nixpkgs {
           inherit system;
           config.allowUnfree = true;
         }
-    );
-  in {
-    inherit lib;
-    nixosModules = import ./modules/nixos;
-    homeManagerModules = import ./modules/home-manager;
+      );
+    in
+    {
+      inherit lib;
+      nixosModules = import ./modules/nixos;
+      homeManagerModules = import ./modules/home-manager;
 
-    overlays = import ./overlays {inherit inputs outputs;};
-    hydraJobs = import ./hydra.nix {inherit inputs outputs;};
+      overlays = import ./overlays { inherit inputs outputs; };
+      hydraJobs = import ./hydra.nix { inherit inputs outputs; };
 
-    packages = forEachSystem (pkgs: import ./pkgs {inherit pkgs;});
-    devShells = forEachSystem (pkgs: import ./shell.nix {inherit pkgs;});
-    formatter = forEachSystem (pkgs: pkgs.alejandra);
+      packages = forEachSystem (pkgs: import ./pkgs { inherit pkgs; });
+      devShells = forEachSystem (pkgs: import ./shell.nix { inherit pkgs; });
+      formatter = forEachSystem (pkgs: pkgs.alejandra);
 
-    nixosConfigurations = {
-      # Main desktop
-      atlas = lib.nixosSystem {
-        modules = [./hosts/atlas];
-        specialArgs = {
-          inherit inputs outputs;
+      nixosConfigurations = {
+        # Personal laptop (Tuxedo InfinityBook Pro 14)
+        tuxedo = lib.nixosSystem {
+          modules = [ ./hosts/maia ];
+          specialArgs = {
+            inherit inputs outputs;
+          };
+        };
+
+        # Main desktop
+        atlas = lib.nixosSystem {
+          modules = [ ./hosts/atlas ];
+          specialArgs = {
+            inherit inputs outputs;
+          };
+        };
+        # Living room desktop
+        pleione = lib.nixosSystem {
+          modules = [ ./hosts/pleione ];
+          specialArgs = {
+            inherit inputs outputs;
+          };
+        };
+        # Personal laptop (Framework 13)
+        maia = lib.nixosSystem {
+          modules = [ ./hosts/maia ];
+          specialArgs = {
+            inherit inputs outputs;
+          };
+        };
+        # Core server (Vultr)
+        alcyone = lib.nixosSystem {
+          modules = [ ./hosts/alcyone ];
+          specialArgs = {
+            inherit inputs outputs;
+          };
+        };
+        # Build and game server (Oracle)
+        celaeno = lib.nixosSystem {
+          modules = [ ./hosts/celaeno ];
+          specialArgs = {
+            inherit inputs outputs;
+          };
+        };
+        # Build and game server (Magalu Cloud)
+        taygeta = lib.nixosSystem {
+          modules = [ ./hosts/taygeta ];
+          specialArgs = {
+            inherit inputs outputs;
+          };
+        };
+        # Media server (RPi)
+        merope = lib.nixosSystem {
+          modules = [ ./hosts/merope ];
+          specialArgs = {
+            inherit inputs outputs;
+          };
         };
       };
-      # Living room desktop
-      pleione = lib.nixosSystem {
-        modules = [./hosts/pleione];
-        specialArgs = {
-          inherit inputs outputs;
-        };
-      };
-      # Personal laptop (Framework 13)
-      maia = lib.nixosSystem {
-        modules = [./hosts/maia];
-        specialArgs = {
-          inherit inputs outputs;
-        };
-      };
-      # Core server (Vultr)
-      alcyone = lib.nixosSystem {
-        modules = [./hosts/alcyone];
-        specialArgs = {
-          inherit inputs outputs;
-        };
-      };
-      # Build and game server (Oracle)
-      celaeno = lib.nixosSystem {
-        modules = [./hosts/celaeno];
-        specialArgs = {
-          inherit inputs outputs;
-        };
-      };
-      # Build and game server (Magalu Cloud)
-      taygeta = lib.nixosSystem {
-        modules = [./hosts/taygeta];
-        specialArgs = {
-          inherit inputs outputs;
-        };
-      };
-      # Media server (RPi)
-      merope = lib.nixosSystem {
-        modules = [./hosts/merope];
-        specialArgs = {
-          inherit inputs outputs;
+
+      # Standalone HM only
+      homeConfigurations = {
+        # Work laptop
+        "gabriel@electra" = lib.homeManagerConfiguration {
+          modules = [
+            ./home/gabriel/electra.nix
+            ./home/gabriel/nixpkgs.nix
+          ];
+          pkgs = pkgsFor.x86_64-linux;
+          extraSpecialArgs = {
+            inherit inputs outputs;
+          };
         };
       };
     };
-
-    # Standalone HM only
-    homeConfigurations = {
-      # Work laptop
-      "gabriel@electra" = lib.homeManagerConfiguration {
-        modules = [ ./home/gabriel/electra.nix ./home/gabriel/nixpkgs.nix ];
-        pkgs = pkgsFor.x86_64-linux;
-        extraSpecialArgs = {
-          inherit inputs outputs;
-        };
-      };
-    };
-  };
 }
