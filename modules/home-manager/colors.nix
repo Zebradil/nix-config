@@ -4,22 +4,24 @@
   pkgs,
   outputs,
   ...
-}: let
+}:
+let
   cfg = config.colorscheme;
   inherit (lib) types mkOption;
 
   hexColor = types.strMatching "#([0-9a-fA-F]{3}){1,2}";
-in {
+in
+{
   options.colorscheme = {
     source = mkOption {
       type = types.either types.path hexColor;
-      default =
-        if config.wallpaper != null
-        then config.wallpaper
-        else "#2B3975";
+      default = if config.wallpaper != null then config.wallpaper else "#2B3975";
     };
     mode = mkOption {
-      type = types.enum ["dark" "light"];
+      type = types.enum [
+        "dark"
+        "light"
+      ];
       default = "dark";
     };
     type = mkOption {
@@ -46,10 +48,15 @@ in {
     hosts = mkOption {
       readOnly = true;
       type = types.attrs;
-      default = let
-        homeConfigs = lib.mapAttrs' (n: v: lib.nameValuePair (lib.last (lib.splitString "@" n)) v.config) outputs.homeConfigurations;
-        nixosConfigs = lib.mapAttrs (_: v: v.config.home-manager.users.gabriel) outputs.nixosConfigurations;
-      in 
+      default =
+        let
+          homeConfigs = lib.mapAttrs' (
+            n: v: lib.nameValuePair (lib.last (lib.splitString "@" n)) v.config
+          ) outputs.homeConfigurations;
+          nixosConfigs = lib.mapAttrs (
+            _: v: v.config.home-manager.users.zebradil
+          ) outputs.nixosConfigurations;
+        in
         lib.mapAttrs (_: v: v.colorscheme.rawColorscheme.colors.${cfg.mode}) (homeConfigs // nixosConfigs);
     };
   };

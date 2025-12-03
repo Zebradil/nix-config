@@ -118,7 +118,7 @@
       nixosConfigurations = {
         # Personal laptop (Tuxedo InfinityBook Pro 14)
         tuxedo = lib.nixosSystem {
-          modules = [ ./hosts/maia ];
+          modules = [ ./hosts/tuxedo ];
           specialArgs = {
             inherit inputs outputs;
           };
