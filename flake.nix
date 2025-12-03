@@ -123,71 +123,21 @@
             inherit inputs outputs;
           };
         };
-
-        # Main desktop
-        atlas = lib.nixosSystem {
-          modules = [ ./hosts/atlas ];
-          specialArgs = {
-            inherit inputs outputs;
-          };
-        };
-        # Living room desktop
-        pleione = lib.nixosSystem {
-          modules = [ ./hosts/pleione ];
-          specialArgs = {
-            inherit inputs outputs;
-          };
-        };
-        # Personal laptop (Framework 13)
-        maia = lib.nixosSystem {
-          modules = [ ./hosts/maia ];
-          specialArgs = {
-            inherit inputs outputs;
-          };
-        };
-        # Core server (Vultr)
-        alcyone = lib.nixosSystem {
-          modules = [ ./hosts/alcyone ];
-          specialArgs = {
-            inherit inputs outputs;
-          };
-        };
-        # Build and game server (Oracle)
-        celaeno = lib.nixosSystem {
-          modules = [ ./hosts/celaeno ];
-          specialArgs = {
-            inherit inputs outputs;
-          };
-        };
-        # Build and game server (Magalu Cloud)
-        taygeta = lib.nixosSystem {
-          modules = [ ./hosts/taygeta ];
-          specialArgs = {
-            inherit inputs outputs;
-          };
-        };
-        # Media server (RPi)
-        merope = lib.nixosSystem {
-          modules = [ ./hosts/merope ];
-          specialArgs = {
-            inherit inputs outputs;
-          };
-        };
       };
 
-      # Standalone HM only
+      # # Standalone HM only
       homeConfigurations = {
-        # Work laptop
-        "gabriel@electra" = lib.homeManagerConfiguration {
-          modules = [
-            ./home/gabriel/electra.nix
-            ./home/gabriel/nixpkgs.nix
-          ];
-          pkgs = pkgsFor.x86_64-linux;
-          extraSpecialArgs = {
-            inherit inputs outputs;
-          };
-        };
+        #   # Work laptop
+        #   "gabriel@electra" = lib.homeManagerConfiguration {
+        #     modules = [
+        #       ./home/gabriel/electra.nix
+        #       ./home/gabriel/nixpkgs.nix
+        #     ];
+        #     pkgs = pkgsFor.x86_64-linux;
+        #     extraSpecialArgs = {
+        #       inherit inputs outputs;
+        #     };
+        #   };
       };
     };
 }

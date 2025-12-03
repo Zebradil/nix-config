@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   imports = [
     ./fish
 
@@ -14,7 +15,6 @@
     ./nix-index.nix
     ./pfetch.nix
     ./ssh.nix
-    ./xpo.nix
     ./fzf.nix
     ./jira.nix
   ];
