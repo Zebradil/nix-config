@@ -5,7 +5,7 @@ keys:
   # Hosts
   - hosts:
     - &tuxedo age1cmdzxa6lymudn9jacup5nph3qdzcjea6s6nlp2xw6mg7jwsscqtsez5naa
-    - &junior age1u3w2tsn0a92gt55ychrl8e8v456pwv8cvdj90tgtrg8mhaatjq7sh6w5c8
+    - &junior age1aafh2qu2yfexdpdsp6m3exarwhtvuwpnx6x8jwt0x7s0mkc445nskvmxvk
 creation_rules:
   - path_regex: hosts/common/secrets.ya?ml$
     key_groups:
