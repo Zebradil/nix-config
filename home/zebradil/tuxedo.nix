@@ -1,11 +1,12 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   imports = [
     ./global
-    ./features/desktop/hyprland
+    # ./features/desktop/hyprland
     ./features/desktop/wireless
-    ./features/productivity
+    # ./features/productivity
     ./features/pass
-    ./features/games
+    # ./features/games
   ];
 
   # Purple
