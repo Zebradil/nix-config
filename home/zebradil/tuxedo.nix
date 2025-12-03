@@ -2,7 +2,7 @@
 {
   imports = [
     ./global
-    # ./features/desktop/hyprland
+    ./features/desktop/hyprland
     ./features/desktop/wireless
     # ./features/productivity
     ./features/pass
