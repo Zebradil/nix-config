@@ -1,16 +1,16 @@
 {
   description = "My NixOS configuration";
 
-  nixConfig = {
-    extra-substituters = [
-      "https://cache.m7.rs"
-      "https://nix-gaming.cachix.org"
-    ];
-    extra-trusted-public-keys = [
-      "cache.m7.rs:kszZ/NSwE/TjhOcPPQ16IuUiuRSisdiIwhKZCxguaWg="
-      "nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4="
-    ];
-  };
+  # nixConfig = {
+  #   extra-substituters = [
+  #     "https://cache.m7.rs"
+  #     "https://nix-gaming.cachix.org"
+  #   ];
+  #   extra-trusted-public-keys = [
+  #     "cache.m7.rs:kszZ/NSwE/TjhOcPPQ16IuUiuRSisdiIwhKZCxguaWg="
+  #     "nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4="
+  #   ];
+  # };
 
   inputs = {
     # Nix ecosystem
