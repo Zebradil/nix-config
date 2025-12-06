@@ -3,13 +3,21 @@
   lib,
   config,
   ...
-}: let
+}:
+let
   hosts = lib.attrNames outputs.nixosConfigurations;
 
   # Sops needs acess to the keys before the persist dirs are even mounted; so
   # just persisting the keys won't work, we must point at /persist
   hasOptinPersistence = config.environment.persistence ? "/persist";
-in {
+in
+{
+  sops.secrets.ssh_host_ed25519_key = {
+    sopsFile = ../../${config.networking.hostName}/ssh_host_ed25519.key;
+    format = "binary";
+    path = "${lib.optionalString hasOptinPersistence "/persist"}/etc/ssh/ssh_host_ed25519_key";
+  };
+
   services.openssh = {
     enable = true;
     settings = {
@@ -38,18 +46,12 @@ in {
     # Each hosts public key
     knownHosts = lib.genAttrs hosts (hostname: {
       publicKeyFile = ../../${hostname}/ssh_host_ed25519_key.pub;
-      extraHostNames =
-        [
-          "${hostname}.m7.rs"
-        ]
-        ++
+      extraHostNames = [
+        "${hostname}.local"
+      ]
+      ++
         # Alias for localhost if it's the same host
-        (lib.optional (hostname == config.networking.hostName) "localhost")
-        # Alias to m7.rs and git.m7.rs if it's alcyone
-        ++ (lib.optionals (hostname == "alcyone") [
-          "m7.rs"
-          "git.m7.rs"
-        ]);
+        (lib.optional (hostname == config.networking.hostName) "localhost");
     });
   };
 

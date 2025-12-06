@@ -13,3 +13,9 @@ creation_rules:
       - *junior
       - *tuxedo
       - *zebradil
+  - path_regex: hosts/tuxedo/ssh_host_ed25519.key$
+    key_groups:
+    - age:
+      - *junior
+      - *tuxedo
+      - *zebradil
