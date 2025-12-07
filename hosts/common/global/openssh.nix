@@ -12,12 +12,6 @@ let
   hasOptinPersistence = config.environment.persistence ? "/persist";
 in
 {
-  sops.secrets.ssh_host_ed25519_key = {
-    sopsFile = ../../${config.networking.hostName}/ssh_host_ed25519.key;
-    format = "binary";
-    path = "${lib.optionalString hasOptinPersistence "/persist"}/etc/ssh/ssh_host_ed25519_key";
-  };
-
   services.openssh = {
     enable = true;
     settings = {
@@ -36,6 +30,9 @@ in
 
     hostKeys = [
       {
+        # The key must be placed beforehand manually, as it is used by sops-nix to decrypt secrets.
+        # This can be done either via nixos-anywhere's --extra-files option,
+        # or manually copying it before first boot, while the system root is mounted in live USB.
         path = "${lib.optionalString hasOptinPersistence "/persist"}/etc/ssh/ssh_host_ed25519_key";
         type = "ed25519";
       }
@@ -58,6 +55,6 @@ in
   # Passwordless sudo when SSH'ing with keys
   security.pam.sshAgentAuth = {
     enable = true;
-    authorizedKeysFiles = ["/etc/ssh/authorized_keys.d/%u"];
+    authorizedKeysFiles = [ "/etc/ssh/authorized_keys.d/%u" ];
   };
 }
