@@ -1,11 +1,8 @@
 { ... }:
 {
   imports = [
-    ./base.nix
+    ./rpi.nix
   ];
-
-  # Optimization for SD cards (do not compress the image, faster build)
-  sdImage.compressImage = false;
 
   services.mediamtx = {
     enable = true;
