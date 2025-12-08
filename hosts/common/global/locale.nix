@@ -5,6 +5,10 @@
     extraLocaleSettings = {
       LC_TIME = lib.mkDefault "en_DK.UTF-8";
     };
+    extraLocales = [
+      "de_DE.UTF-8"
+      "en_DK.UTF-8"
+    ];
   };
   location.provider = "geoclue2";
   time.timeZone = lib.mkDefault "Europe/Berlin";
