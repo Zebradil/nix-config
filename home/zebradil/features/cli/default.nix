@@ -34,11 +34,14 @@
     viddy # Better watch
 
     nixd # Nix LSP
-    alejandra # Nix formatter
-    nixfmt-rfc-style
+    nixfmt # Nix formatter
     nvd # Differ
     nix-diff # Differ, more detailed
     nix-output-monitor
     nh # Nice wrapper for NixOS and HM
+
+    htop # Process viewer
+    neofetch # System info
+    btop # Better htop
   ];
 }

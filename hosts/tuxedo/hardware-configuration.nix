@@ -11,10 +11,9 @@
   ];
 
   nixpkgs.hostPlatform.system = "x86_64-linux";
-  # boot.binfmt.emulatedSystems = [
-  #   "aarch64-linux"
-  #   "i686-linux"
-  # ];
+  boot.binfmt.emulatedSystems = [
+    "aarch64-linux"
+  ];
   hardware.cpu.amd.updateMicrocode = true;
   powerManagement.cpuFreqGovernor = "ondemand";
 
