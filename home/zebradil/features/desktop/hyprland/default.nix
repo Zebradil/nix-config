@@ -110,7 +110,7 @@ in
       };
       input = {
         kb_layout = "us,us,us";
-        kb_variant = ",dvorak,russian";
+        kb_variant = ",dvorak,rus";
         kb_options = "grp:caps_toggle,ctrl:swap_lalt_lctl";
         touchpad = {
           disable_while_typing = false;
