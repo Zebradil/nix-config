@@ -109,7 +109,9 @@ in
         movefocus_cycles_fullscreen = false;
       };
       input = {
-        kb_layout = "us_intl";
+        kb_layout = "us,us,us";
+        kb_variant = ",dvorak,russian";
+        kb_options = "grp:caps_toggle,ctrl:swap_lalt_lctl";
         touchpad = {
           disable_while_typing = false;
           natural_scroll = true;
@@ -269,8 +271,6 @@ in
         ",XF86AudioMute,exec,${pactl} set-sink-mute @DEFAULT_SINK@ toggle; ${swayosd.output-volume}"
         "SHIFT,XF86AudioMute,exec,${pactl} set-source-mute @DEFAULT_SOURCE@ toggle; ${swayosd.input-volume}"
         ",XF86AudioMicMute,exec,${pactl} set-source-mute @DEFAULT_SOURCE@ toggle; ${swayosd.input-volume}"
-        # Show caps lock
-        ",Caps_Lock,exec,${swayosd.caps-lock}"
       ]
       ++ (
         let
