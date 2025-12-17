@@ -3,7 +3,7 @@
   fontProfiles = {
     enable = true;
     monospace = {
-      name = "IosevkaTerm Nerd Font Mono";
+      name = "Iosevka NFM";
       package = pkgs.nerd-fonts.iosevka;
     };
     regular = {
