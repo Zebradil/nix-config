@@ -1,9 +1,10 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   fontProfiles = {
     enable = true;
     monospace = {
-      name = "FiraMono Nerd Font";
-      package = pkgs.nerd-fonts.fira-mono;
+      name = "IosevkaTerm Nerd Font Mono";
+      package = pkgs.nerd-fonts.iosevka;
     };
     regular = {
       name = "Fira Sans";
