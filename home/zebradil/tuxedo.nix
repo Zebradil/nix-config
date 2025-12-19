@@ -16,10 +16,10 @@
     {
       name = "eDP-1";
       width = 2880;
-      height = 1920;
+      height = 1800;
       workspace = "1";
       primary = true;
-      refreshRate = 120;
+      refreshRate = 60; # It can do 120
       scale = 2.0;
     }
   ];
