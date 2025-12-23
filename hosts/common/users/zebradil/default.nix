@@ -33,19 +33,28 @@ in
     openssh.authorizedKeys.keys = lib.splitString "\n" (
       builtins.readFile ../../../../home/zebradil/ssh.pub
     );
-    hashedPasswordFile = config.sops.secrets.zebradil-password.path;
+    hashedPasswordFile = config.sops.secrets.password.path;
     packages = [ pkgs.home-manager ];
   };
 
-  sops.secrets.zebradil-password = {
-    sopsFile = ../../secrets.yaml;
+  sops.defaultSopsFile = ./secrets.yaml;
+
+  sops.secrets.password = {
     neededForUsers = true;
   };
 
   home-manager.users.zebradil = import ../../../../home/zebradil/${config.networking.hostName}.nix;
 
+  sops.secrets."u2f_keys/${config.networking.hostName}" = {
+    path = "/home/zebradil/.config/Yubico/u2f_keys";
+    owner = "zebradil";
+    mode = "0400";
+  };
+
   security.pam.services = {
     swaylock = { };
     hyprlock = { };
+    login.u2fAuth = true;
+    sudo.u2fAuth = true;
   };
 }

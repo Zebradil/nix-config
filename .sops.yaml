@@ -1,21 +1,33 @@
 keys:
   # Users
   - users:
-    - &zebradil age188h98rs643kglmetvqt3hhnllw0ga45jg94p8xar2qe0c987k59q9qxv3v
+      - &zebradil age188h98rs643kglmetvqt3hhnllw0ga45jg94p8xar2qe0c987k59q9qxv3v
   # Hosts
   - hosts:
-    - &tuxedo age1nqcqaf0e2jzj7w9pj3d3cdlf8havcmzdfth8gzvgm0drwlqrnveq8eu8j2
-    - &junior age1aafh2qu2yfexdpdsp6m3exarwhtvuwpnx6x8jwt0x7s0mkc445nskvmxvk
+      - &tuxedo age1nqcqaf0e2jzj7w9pj3d3cdlf8havcmzdfth8gzvgm0drwlqrnveq8eu8j2
+      - &junior age1aafh2qu2yfexdpdsp6m3exarwhtvuwpnx6x8jwt0x7s0mkc445nskvmxvk
 creation_rules:
-  - path_regex: hosts/common/secrets.ya?ml$
+  - path_regex: home/zebradil/secrets\.ya?ml$
     key_groups:
-    - age:
-      - *junior
-      - *tuxedo
-      - *zebradil
-  - path_regex: hosts/tuxedo/ssh_host_ed25519.key$
+      - age:
+          - *junior
+          - *tuxedo
+          - *zebradil
+  - path_regex: hosts/common/users/zebradil/secrets\.ya?ml$
     key_groups:
-    - age:
-      - *junior
-      - *tuxedo
-      - *zebradil
+      - age:
+          - *junior
+          - *tuxedo
+          - *zebradil
+  - path_regex: hosts/common/secrets\.ya?ml$
+    key_groups:
+      - age:
+          - *junior
+          - *tuxedo
+          - *zebradil
+  - path_regex: hosts/tuxedo/ssh_host_ed25519\.key$
+    key_groups:
+      - age:
+          - *junior
+          - *tuxedo
+          - *zebradil
