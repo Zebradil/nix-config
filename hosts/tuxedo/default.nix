@@ -11,6 +11,7 @@
 
     ../common/global
     ../common/users/zebradil
+    ../common/gui
 
     ../common/optional/peripherals.nix
     ../common/optional/pipewire.nix

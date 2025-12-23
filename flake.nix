@@ -59,6 +59,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # Hyprland
+    hyprland = {
+      url = "github:hyprwm/Hyprland/v0.52.2";
+      # inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # Third party programs, packaged with nix
     firefox-addons = {
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
@@ -115,7 +121,9 @@
       overlays = import ./overlays { inherit inputs outputs; };
       hydraJobs = import ./hydra.nix { inherit inputs outputs; };
 
-      packages = forEachSystem (pkgs: import ./pkgs { inherit pkgs; } // import ./isos { inherit pkgs inputs; });
+      packages = forEachSystem (
+        pkgs: import ./pkgs { inherit pkgs; } // import ./isos { inherit pkgs inputs; }
+      );
       devShells = forEachSystem (pkgs: import ./shell.nix { inherit pkgs; });
       formatter = forEachSystem (pkgs: pkgs.alejandra);
 
