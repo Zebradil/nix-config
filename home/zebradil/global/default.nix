@@ -11,6 +11,7 @@
     inputs.impermanence.homeManagerModules.impermanence
     ../features/cli
     ../features/helix
+    ./ssh-public-key.nix
   ]
   ++ (builtins.attrValues outputs.homeManagerModules);
 
