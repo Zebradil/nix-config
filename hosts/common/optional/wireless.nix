@@ -15,7 +15,6 @@ in
     enable = true;
   };
 
-  # Wireless secrets stored through sops
   sops.secrets.wireless = {
     sopsFile = ../secrets.yaml;
     neededForUsers = true;

@@ -14,7 +14,6 @@ in
     shell = pkgs.fish;
     extraGroups = ifTheyExist [
       "audio"
-      "deluge"
       "docker"
       "git"
       "i2c"
