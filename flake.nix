@@ -112,6 +112,10 @@
           config.allowUnfree = true;
         }
       );
+      commonModules = [
+        # TODO: hide behind a toggle
+        inputs.home-manager.nixosModules.home-manager
+      ];
     in
     {
       inherit lib;
@@ -125,12 +129,12 @@
         pkgs: import ./pkgs { inherit pkgs; } // import ./isos { inherit pkgs inputs; }
       );
       devShells = forEachSystem (pkgs: import ./shell.nix { inherit pkgs; });
-      formatter = forEachSystem (pkgs: pkgs.alejandra);
+      formatter = forEachSystem (pkgs: pkgs.nixpkgs-fmt);
 
       nixosConfigurations = {
         # Personal laptop (Tuxedo InfinityBook Pro 14)
         tuxedo = lib.nixosSystem {
-          modules = [ ./hosts/tuxedo ];
+          modules = commonModules ++ [ ./hosts/tuxedo ];
           specialArgs = {
             inherit inputs outputs;
           };

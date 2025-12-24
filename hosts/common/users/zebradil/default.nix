@@ -19,8 +19,6 @@ in
       "git"
       "i2c"
       "libvirtd"
-      "minecraft"
-      "mysql"
       "network"
       "plugdev"
       "podman"

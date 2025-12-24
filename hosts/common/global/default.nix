@@ -6,25 +6,18 @@
 }:
 {
   imports = [
-    inputs.home-manager.nixosModules.home-manager
-    # ./acme.nix
-    # ./auto-upgrade.nix
-    ./fish.nix
-    ./locale.nix
-    ./nix.nix
-    ./openssh.nix
-    ./optin-persistence.nix
+    # ./kdeconnect.nix
     # ./podman.nix
-    ./sops.nix
-    # ./steam-hardware.nix
-    ./systemd-initrd.nix
-    ./swappiness.nix
+    # ./prometheus-node-exporter.nix
     # ./tailscale.nix
     # ./tpm.nix
-    # ./gamemode.nix
+    ./fish.nix
+    ./locale.nix
     ./nix-ld.nix
-    # ./prometheus-node-exporter.nix
-    # ./kdeconnect.nix
+    ./nix.nix
+    ./openssh.nix
+    ./sops.nix
+    ./systemd-initrd.nix
     ./upower.nix
   ]
   ++ (builtins.attrValues outputs.nixosModules);
