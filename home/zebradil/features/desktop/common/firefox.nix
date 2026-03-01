@@ -10,7 +10,7 @@
     profiles.zebradil = {
       search = {
         force = true;
-        default = "kagi";
+        default = "google";
         privateDefault = "ddg";
         order = [
           "kagi"
@@ -159,8 +159,7 @@
 
   home = {
     persistence = {
-      # Not persisting is safer
-      # "/persist".directories = [ ".mozilla/firefox" ];
+      "/persist".directories = [ ".mozilla/firefox" ];
     };
   };
 
